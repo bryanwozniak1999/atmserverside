@@ -53,6 +53,16 @@ public class Main extends Application
         stage.setHeight(800);
 
 
+
+
+
+        // text area for basic user info
+        textArea_1 = new TextArea();
+        textArea_1.setEditable(false);
+        textArea_1.setPrefHeight(80);
+        textArea_1.setPrefWidth(300);
+        textArea_1.setFont(Font.font("Verdana", 18));
+
         //
         // text area for real time clock thread to display
         //
@@ -73,20 +83,14 @@ public class Main extends Application
         list.getSelectionModel().selectFirst();
         list.setOnAction(e -> {
         	selected.setText("Selected: " + list.getValue());
+        	textArea_1.setText("Name: " + list.getValue() + "\nBalance: $30000" + "\nTransactions: 25" + "\nBank Accounts: 5");
         });
         
         
         top.add(clock, 0, 0);
         top.add(selected, 1, 0);
         top.add(list, 2, 0);
-        
 
-
-        // available text area
-        textArea_1 = new TextArea();
-        textArea_1.setEditable(false);
-        textArea_1.setPrefHeight(80);
-        textArea_1.setPrefWidth(300);
 
 
         // main area for socket server to display messages
