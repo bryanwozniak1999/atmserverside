@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -119,6 +120,7 @@ public class Main extends Application
         // define all BUTTONS
         //
         Button exitButton = new Button("EXIT");
+        exitButton.getStylesheets().add("/UI/styles.css");
         exitButton.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -130,6 +132,7 @@ public class Main extends Application
 
 
         Button clients = new Button("Clients");
+        clients.getStylesheets().add("/UI/styles.css");
         clients.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -139,7 +142,8 @@ public class Main extends Application
             }
         });
 
-        Button showLog = new Button("Show Log");
+        Button showLog = new Button("Transaction Log");
+        showLog.getStylesheets().add("/UI/styles.css");
         showLog.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -195,7 +199,8 @@ public class Main extends Application
             }
         });
 
-        Button summary = new Button("Summary");
+        Button summary = new Button("Bank Accounts");
+        summary.getStylesheets().add("/UI/styles.css");
         summary.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -205,82 +210,17 @@ public class Main extends Application
             }
         });
 
-        Button newKiosk = new Button("New Kiosk");
-        newKiosk.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent e)
-            {
-                Platform.runLater(new Runnable()
-                {
-                    public void run()
-                    {
-                        ServerUtils.sockServer.createNewKiosk();
-
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("--- Ticket Kiosk ---");
-                        alert.setHeaderText("Total Number of Transactions");
-
-                        alert.setContentText(ServerUtils.sockServer.getAllTransactions());
-
-                        alert.showAndWait();
-                    }
-                });
-            }
-        });
-
-        Button query1 = new Button("Query #1");
-        query1.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent e)
-            {
-
-            }
-        });
-
-        Button query2 = new Button("Query #2");
-        query2.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent e)
-            {
-
-            }
-        });
-
-        Button query3 = new Button("Query #3");
-        query3.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent e)
-            {
-                Platform.runLater(new Runnable()
-                {
-                    public void run()
-                    {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("--- Ticket Kiosk ---");
-                        alert.setHeaderText("Total Number of Transactions");
-
-                        alert.setContentText(ServerUtils.sockServer.getAllTransactions());
-
-                        alert.showAndWait();
-                    }
-                });
-            }
-        });
-
+       
 
 
         //
         // all buttons go to horizontal view
         //
         HBox hb = new HBox();
-        hb.setPadding(new Insets(15, 12, 15, 12));
-        hb.setSpacing(120);
-        hb.getChildren().addAll(exitButton, clients, showLog, summary, newKiosk, query1, query2, query3);
-
+        hb.setPadding(new Insets(15, 15, 15, 15));
+        hb.setSpacing(50);
+        hb.getChildren().addAll(exitButton, clients, showLog, summary);
+        hb.setAlignment(Pos.CENTER);
         //
         // vertical has IP text area and buttons below
         //
