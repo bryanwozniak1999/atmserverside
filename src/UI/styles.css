@@ -1,5 +1,9 @@
-.button {
+.primary-color {
   -fx-background-color: #800000;
   -fx-text-fill: white;
+}
+
+.text-area-background {
+  -fx-control-inner-background: #800000;
 }
 

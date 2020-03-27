@@ -32,7 +32,6 @@ public class Main extends Application
     public static TextArea textArea;
     public static TextArea textArea_1;
     public static TextArea textArea_2;
-    public static TextArea textArea_3;
     TextArea               clock;
 
     @Override
@@ -75,6 +74,7 @@ public class Main extends Application
         clock.setEditable(false);
         clock.setPrefHeight(30);
         clock.setPrefWidth(900);
+        clock.getStyleClass().add("text-area-background");
         
         // drop down of users names or ids
         String users[] = {"John Doe", "Jane Doe", "Anonymous"};
@@ -101,16 +101,10 @@ public class Main extends Application
         textArea.setPrefHeight(80);
         textArea.setPrefWidth(300);
 
-
-        // available text area
-        textArea_3 = new TextArea();
-        textArea_3.setEditable(false);
-        textArea_3.setPrefHeight(80);
-        textArea_3.setPrefWidth(300);
-
-
         // area for IP addresses of clients who connect to the socket server
         textArea_2 = new TextArea();
+        textArea_2.getStyleClass().add("text-area-background");
+        textArea_2.setFont(Font.font("Verdana", 18));
         textArea_2.setEditable(false);
         textArea_2.setPrefHeight(80);
         textArea_2.setPrefWidth(900);
@@ -120,7 +114,7 @@ public class Main extends Application
         // define all BUTTONS
         //
         Button exitButton = new Button("EXIT");
-        exitButton.getStylesheets().add("/UI/styles.css");
+        exitButton.getStyleClass().add("primary-color");
         exitButton.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -132,7 +126,7 @@ public class Main extends Application
 
 
         Button clients = new Button("Clients");
-        clients.getStylesheets().add("/UI/styles.css");
+        clients.getStyleClass().add("primary-color");
         clients.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -143,7 +137,7 @@ public class Main extends Application
         });
 
         Button showLog = new Button("Transaction Log");
-        showLog.getStylesheets().add("/UI/styles.css");
+        showLog.getStyleClass().add("primary-color");
         showLog.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -200,7 +194,7 @@ public class Main extends Application
         });
 
         Button summary = new Button("Bank Accounts");
-        summary.getStylesheets().add("/UI/styles.css");
+        summary.getStyleClass().add("primary-color");
         summary.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -235,7 +229,6 @@ public class Main extends Application
         bp.setTop(top);
         bp.setLeft(textArea_1);
         bp.setCenter(textArea);
-        bp.setRight(textArea_3);
         bp.setBottom(vb);
 
 
@@ -250,6 +243,7 @@ public class Main extends Application
         // lights, camera, action
         //
         Scene scene = new Scene(bp);
+        scene.getStylesheets().add("/UI/styles.css");
         stage.setScene(scene);
         stage.show();
     }
