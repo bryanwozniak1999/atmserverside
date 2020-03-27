@@ -9,14 +9,18 @@ import java.net.UnknownHostException;
 import java.util.Date;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -52,10 +56,30 @@ public class Main extends Application
         //
         // text area for real time clock thread to display
         //
+        
+        GridPane top = new GridPane();
+        top.setHgap(10);
+        
         clock = new TextArea();
         clock.setEditable(false);
         clock.setPrefHeight(30);
         clock.setPrefWidth(900);
+        
+        // drop down of users names or ids
+        String users[] = {"John Doe", "Jane Doe", "Anonymous"};
+        
+        Label selected = new Label("Selected: " + users[0]);
+        ComboBox<String> list = new ComboBox<String>(FXCollections.observableArrayList(users));
+        list.getSelectionModel().selectFirst();
+        list.setOnAction(e -> {
+        	selected.setText("Selected: " + list.getValue());
+        });
+        
+        
+        top.add(clock, 0, 0);
+        top.add(selected, 1, 0);
+        top.add(list, 2, 0);
+        
 
 
         // available text area
@@ -264,7 +288,7 @@ public class Main extends Application
         // main BORDER PANE pane layout
         //
         BorderPane bp = new BorderPane();
-        bp.setTop(clock);
+        bp.setTop(top);
         bp.setLeft(textArea_1);
         bp.setCenter(textArea);
         bp.setRight(textArea_3);
