@@ -122,7 +122,7 @@ public class sockServer implements Runnable
         Collections.sort(v);
 
         for (String str : v)
-            rs = rs + bankAccounts.get(str) + "\r\n";
+            rs = rs + bankAccounts.get(str) + "\r\n\n";
 
         return rs;
     }
@@ -207,16 +207,13 @@ public class sockServer implements Runnable
                     }
                     else if (clientString.contains("BankAccountsQuery>"))
                     {
-                        String tokens[] = clientString.split("\\>");
+                        ArrayList<String> bankAccountsList = new ArrayList<>();
 
-                        if (bankAccounts.containsKey(tokens[1]) == true)
-                        {
-                            pstream.println(bankAccounts.get(tokens[1]).toString());
+                        for (var bankAccount: bankAccounts.values()) {
+                            bankAccountsList.add(bankAccount.toString());
                         }
-                        else
-                        {
-                            pstream.println("NACK : ERROR : No such kiosk number!");
-                        }
+
+                        pstream.println(String.join(">", bankAccountsList));
                     }
                     else if (clientString.contains("NewBankAccount>")) {
                         String tokens[] = clientString.split("\\>");

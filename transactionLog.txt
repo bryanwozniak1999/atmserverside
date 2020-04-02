@@ -1,1 +1,13 @@
 04-01-2020 23.59.11 : DataEntry>NewBankAccount>new account 1,SAVINGS,5b97b770-9a44-4f9a-978c-8e8b4e73f317
+04-02-2020 00.19.22 : DataEntry>BankAccountsQuery>
+04-02-2020 00.19.41 : DataEntry>NewBankAccount>new account,SAVINGS,8fb3574f-de9c-43b9-bc85-1b2e47673534
+04-02-2020 00.19.57 : DataEntry>BankAccountsQuery>
+04-02-2020 00.20.25 : DataEntry>NewBankAccount>account 2,SAVINGS,6f7e5224-470b-4d08-9f98-2b45d2f6b236
+04-02-2020 00.20.43 : DataEntry>BankAccountsQuery>
+04-02-2020 00.24.55 : DataEntry>BankAccountsQuery>
+04-02-2020 00.39.38 : DataEntry>BankAccountsQuery>
+04-02-2020 00.40.34 : DataEntry>BankAccountsQuery>
+04-02-2020 00.42.29 : DataEntry>BankAccountsQuery>
+04-02-2020 00.42.44 : DataEntry>NewBankAccount>another account,CHECKING,4cf8c2d3-9ea1-4664-963d-6e02be3ae591
+04-02-2020 00.42.53 : DataEntry>BankAccountsQuery>
+04-02-2020 00.45.14 : DataEntry>BankAccountsQuery>

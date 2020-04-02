@@ -16,6 +16,6 @@ public class BankAccount
 
     public String toString()
     {
-        return AccountId + ": " + "AccountName = " + AccountName + "," + "AccountType = " + AccountType.toString();
+        return AccountName + "," + AccountType + ","  + AccountId;
     }
 }
