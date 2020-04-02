@@ -77,8 +77,9 @@ public class sockServer implements Runnable
         Main.textArea.appendText("Listening on port " + port_num + newline);
 
         //
-        // initialize the hash table to the following keys
+        // initialize the bank accounts hash table with whats written in the file
         //
+        bankAccounts = new fileIO().readBankAccountData();
 
         sessionDone = false;
         while (sessionDone == false)
@@ -221,7 +222,10 @@ public class sockServer implements Runnable
                         String tokens[] = clientString.split("\\>");
                         String args[] = tokens[2].split("\\,");
 
-                        bankAccounts.put(args[2], new BankAccount(args[0], args[1], args[2]));
+                        if (!bankAccounts.containsKey(args[2])) {
+                            transLog.wrBankAccountData(String.join(",", args));
+                            bankAccounts.put(args[2], new BankAccount(args[0], args[1], args[2]));
+                        }
                     }
                     else if (clientString.contains("Date>"))
                     {

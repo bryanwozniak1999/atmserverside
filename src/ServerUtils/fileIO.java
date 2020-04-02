@@ -1,11 +1,11 @@
 package ServerUtils;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import Model.BankAccount;
+
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Hashtable;
 
 public class fileIO
 {
@@ -31,5 +31,45 @@ public class fileIO
         outg.println(timeStamp + " : " + dataStr);
 
         outg.close();
+    }
+
+    public void wrBankAccountData(String dataStr) {
+        FileWriter fwg = null;
+        try {
+            fwg = new FileWriter("bankAccounts.txt", true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BufferedWriter bwg = new BufferedWriter(fwg);
+        PrintWriter outg = new PrintWriter(bwg);
+
+        outg.println(dataStr);
+
+        outg.close();
+    }
+
+    public Hashtable<String, BankAccount> readBankAccountData() {
+        Hashtable<String, BankAccount> bankAccountsHash =
+                new Hashtable<String, BankAccount>();
+
+        File bankAccounts = new File("bankAccounts.txt");
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(bankAccounts));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String args[] = line.split("\\,");
+
+                bankAccountsHash.put(args[2], new BankAccount(args[0], args[1], args[2]));
+            }
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return bankAccountsHash;
     }
 }
