@@ -53,9 +53,9 @@ public class fileIO
         Hashtable<String, BankAccount> bankAccountsHash =
                 new Hashtable<String, BankAccount>();
 
-        File bankAccounts = new File("bankAccounts.txt");
-
         try {
+            File bankAccounts = new File("bankAccounts.txt");
+
             BufferedReader br = new BufferedReader(new FileReader(bankAccounts));
             String line;
 

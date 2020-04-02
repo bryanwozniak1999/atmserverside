@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="delete /out directory">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="save the bank accounts to a file">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ServerUtils/fileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerUtils/fileIO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerUtils/sockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerUtils/sockServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585327112387</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="save the bank accounts to a file">
+      <created>1585799727486</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1585799727486</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,55 +254,56 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <MESSAGE value="remove extra text area" />
     <MESSAGE value="delete /out directory" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete /out directory" />
+    <MESSAGE value="save the bank accounts to a file" />
+    <option name="LAST_COMMIT_MESSAGE" value="save the bank accounts to a file" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585187913656">
       <screen x="0" y="23" width="1680" height="963" />
     </state>
     <state x="304" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1680.963@0.23.1680.963" timestamp="1585187913656" />
-    <state x="410" y="107" key="CommitChangelistDialog2" timestamp="1585797316661">
+    <state x="410" y="107" key="CommitChangelistDialog2" timestamp="1585799727355">
       <screen x="0" y="23" width="1680" height="960" />
     </state>
-    <state x="410" y="107" key="CommitChangelistDialog2/0.23.1680.960@0.23.1680.960" timestamp="1585797316661" />
+    <state x="410" y="107" key="CommitChangelistDialog2/0.23.1680.960@0.23.1680.960" timestamp="1585799727355" />
     <state x="410" y="107" key="CommitChangelistDialog2/0.23.1680.963@0.23.1680.963" timestamp="1585327112214" />
-    <state width="1638" height="256" key="GridCell.Tab.0.bottom" timestamp="1585799715643">
+    <state width="1638" height="256" key="GridCell.Tab.0.bottom" timestamp="1585799975535">
       <screen x="0" y="23" width="1680" height="960" />
     </state>
     <state width="1638" height="256" key="GridCell.Tab.0.bottom/0.23.1680.958@0.23.1680.958" timestamp="1585796861066" />
-    <state width="1638" height="256" key="GridCell.Tab.0.bottom/0.23.1680.960@0.23.1680.960" timestamp="1585799715643" />
+    <state width="1638" height="256" key="GridCell.Tab.0.bottom/0.23.1680.960@0.23.1680.960" timestamp="1585799975535" />
     <state width="1638" height="256" key="GridCell.Tab.0.bottom/0.23.1680.961@0.23.1680.961" timestamp="1585797186915" />
     <state width="1638" height="258" key="GridCell.Tab.0.bottom/0.23.1680.963@0.0.1680.1050" timestamp="1585280084706" />
     <state width="1638" height="256" key="GridCell.Tab.0.bottom/0.23.1680.963@0.23.1680.963" timestamp="1585796454849" />
     <state width="1638" height="258" key="GridCell.Tab.0.bottom/0.23.1680.965@0.0.1680.1050" timestamp="1585190173729" />
     <state width="1638" height="258" key="GridCell.Tab.0.bottom/0.23.1680.965@0.23.1680.965" timestamp="1585327274387" />
-    <state width="1638" height="256" key="GridCell.Tab.0.center" timestamp="1585799715642">
+    <state width="1638" height="256" key="GridCell.Tab.0.center" timestamp="1585799975534">
       <screen x="0" y="23" width="1680" height="960" />
     </state>
     <state width="1638" height="258" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1585190173709" />
     <state width="1638" height="256" key="GridCell.Tab.0.center/0.23.1680.958@0.23.1680.958" timestamp="1585796861065" />
-    <state width="1638" height="256" key="GridCell.Tab.0.center/0.23.1680.960@0.23.1680.960" timestamp="1585799715642" />
+    <state width="1638" height="256" key="GridCell.Tab.0.center/0.23.1680.960@0.23.1680.960" timestamp="1585799975534" />
     <state width="1638" height="256" key="GridCell.Tab.0.center/0.23.1680.961@0.23.1680.961" timestamp="1585797186914" />
     <state width="1638" height="258" key="GridCell.Tab.0.center/0.23.1680.963@0.0.1680.1050" timestamp="1585280084705" />
     <state width="1638" height="256" key="GridCell.Tab.0.center/0.23.1680.963@0.23.1680.963" timestamp="1585796454848" />
     <state width="1638" height="258" key="GridCell.Tab.0.center/0.23.1680.965@0.0.1680.1050" timestamp="1585280084678" />
     <state width="1638" height="258" key="GridCell.Tab.0.center/0.23.1680.965@0.23.1680.965" timestamp="1585327274386" />
-    <state width="1638" height="256" key="GridCell.Tab.0.left" timestamp="1585799715642">
+    <state width="1638" height="256" key="GridCell.Tab.0.left" timestamp="1585799975534">
       <screen x="0" y="23" width="1680" height="960" />
     </state>
     <state width="1638" height="256" key="GridCell.Tab.0.left/0.23.1680.958@0.23.1680.958" timestamp="1585796861065" />
-    <state width="1638" height="256" key="GridCell.Tab.0.left/0.23.1680.960@0.23.1680.960" timestamp="1585799715642" />
+    <state width="1638" height="256" key="GridCell.Tab.0.left/0.23.1680.960@0.23.1680.960" timestamp="1585799975534" />
     <state width="1638" height="256" key="GridCell.Tab.0.left/0.23.1680.961@0.23.1680.961" timestamp="1585797186913" />
     <state width="1638" height="258" key="GridCell.Tab.0.left/0.23.1680.963@0.0.1680.1050" timestamp="1585280084705" />
     <state width="1638" height="256" key="GridCell.Tab.0.left/0.23.1680.963@0.23.1680.963" timestamp="1585796454848" />
     <state width="1638" height="258" key="GridCell.Tab.0.left/0.23.1680.965@0.0.1680.1050" timestamp="1585190173728" />
     <state width="1638" height="258" key="GridCell.Tab.0.left/0.23.1680.965@0.23.1680.965" timestamp="1585327274386" />
     <state width="1638" height="258" key="GridCell.Tab.0.left/0.23.1680.966@0.23.1680.966" timestamp="1585190172952" />
-    <state width="1638" height="256" key="GridCell.Tab.0.right" timestamp="1585799715643">
+    <state width="1638" height="256" key="GridCell.Tab.0.right" timestamp="1585799975535">
       <screen x="0" y="23" width="1680" height="960" />
     </state>
     <state width="1638" height="256" key="GridCell.Tab.0.right/0.23.1680.958@0.23.1680.958" timestamp="1585796861065" />
-    <state width="1638" height="256" key="GridCell.Tab.0.right/0.23.1680.960@0.23.1680.960" timestamp="1585799715643" />
+    <state width="1638" height="256" key="GridCell.Tab.0.right/0.23.1680.960@0.23.1680.960" timestamp="1585799975535" />
     <state width="1638" height="256" key="GridCell.Tab.0.right/0.23.1680.961@0.23.1680.961" timestamp="1585797186914" />
     <state width="1638" height="258" key="GridCell.Tab.0.right/0.23.1680.963@0.0.1680.1050" timestamp="1585280084706" />
     <state width="1638" height="256" key="GridCell.Tab.0.right/0.23.1680.963@0.23.1680.963" timestamp="1585796454849" />
