@@ -1,5 +1,6 @@
 package ServerUtils;
 
+import Model.BankAccount;
 import UI.Main;
 
 import java.io.IOException;
@@ -20,12 +21,11 @@ public class sockServer implements Runnable
 {
     Socket csocket;
     String ipString;
-    char threadType;
 
     static Vector<String> vec = new Vector<String>(5);
 
-    public static Hashtable<String, kiosk> clients =
-            new Hashtable<String, kiosk>();
+    public static Hashtable<String, BankAccount> bankAccounts =
+            new Hashtable<String, BankAccount>();
 
     static final String newline = "\n";
     static int first_time = 1;
@@ -79,11 +79,6 @@ public class sockServer implements Runnable
         //
         // initialize the hash table to the following keys
         //
-        clients.put("kiosk#1", new kiosk("kiosk#1", 0, 0, 0.0));
-        clients.put("kiosk#2", new kiosk("kiosk#2", 0, 0, 0.0));
-        clients.put("kiosk#3", new kiosk("kiosk#3", 0, 0, 0.0));
-
-
 
         sessionDone = false;
         while (sessionDone == false)
@@ -115,57 +110,21 @@ public class sockServer implements Runnable
         }
     }
 
-
-
-    static synchronized void hashOperation(char type, String key, String ticks, String d)
-    {
-        switch (type)
-        {
-            case 'T':
-                if (clients.containsKey(key) == true)
-                {
-                    clients.get(key).incrementTrans();
-                    clients.get(key).addTickets(Integer.parseInt(ticks));
-                    clients.get(key).addDollars(Double.parseDouble(d));
-                }
-                break;
-        }
-    }
-
     //
-    // add a new kiosk entry and number to the hash table
+    // get all bank account data from the hash table keys
     //
-    public static void createNewKiosk()
-    {
-        int nextKioskNumber, currentSize = 0;
-        String kioskString;
-
-        currentSize     = clients.size();
-        nextKioskNumber = currentSize + 1;
-        kioskString     = "kiosk#" + nextKioskNumber;
-
-        clients.put(kioskString, new kiosk(kioskString, 0, 0, 0.0));
-    }
-
-
-
-    //
-    // get all transaction data from the hash table keys
-    //
-    public static String getAllTransactions()
+    public static String getAllBankAccounts()
     {
         String rs="";
 
-        List<String> v = new ArrayList<String>(clients.keySet());
+        List<String> v = new ArrayList<String>(bankAccounts.keySet());
         Collections.sort(v);
 
         for (String str : v)
-            rs = rs + clients.get(str.toString()) + "\r\n";
+            rs = rs + bankAccounts.get(str) + "\r\n";
 
         return rs;
     }
-
-
 
     // This is the thread code that ALL clients will run()
     public void run()
@@ -245,49 +204,24 @@ public class sockServer implements Runnable
                     {
                         session_done = true;
                     }
-                    else if (clientString.contains("Query>"))
+                    else if (clientString.contains("BankAccountsQuery>"))
                     {
                         String tokens[] = clientString.split("\\>");
 
-                        if (clients.containsKey(tokens[1]) == true)
+                        if (bankAccounts.containsKey(tokens[1]) == true)
                         {
-                            pstream.println(clients.get(tokens[1]).toString());
+                            pstream.println(bankAccounts.get(tokens[1]).toString());
                         }
                         else
                         {
                             pstream.println("NACK : ERROR : No such kiosk number!");
                         }
                     }
-                    else if (clientString.contains("Transaction>"))
-                    {
+                    else if (clientString.contains("NewBankAccount>")) {
                         String tokens[] = clientString.split("\\>");
-                        String args[]   = tokens[1].split("\\,");
+                        String args[] = tokens[2].split("\\,");
 
-                        if (clients.containsKey(args[0]) == true)
-                        {
-                            hashOperation('T', args[0], args[1], args[2]);
-
-                            pstream.println("ACK");
-                        }
-                        else
-                        {
-                            pstream.println("NACK : ERROR : No such kiosk number!");
-                        }
-                    }
-                    else if (clientString.contains("Configure>"))
-                    {
-                        String tokens[] = clientString.split("\\>");
-
-                        if (tokens.length == 2)
-                        {
-                            clients.put(tokens[1], new kiosk(tokens[1], 0, 0, 0.0));
-
-                            pstream.println("ACK");
-                        }
-                        else
-                        {
-                            pstream.println("NACK : ERROR : Invalid number of parameters!");
-                        }
+                        bankAccounts.put(args[2], new BankAccount(args[0], args[1], args[2]));
                     }
                     else if (clientString.contains("Date>"))
                     {
@@ -376,7 +310,7 @@ public class sockServer implements Runnable
             numOfConnections--;
 
             // update the status text area to show progress of program
-            Main.textArea.appendText("ERROR : Generic Exception!" + newline);
+            Main.textArea.appendText("ERROR : Generic Exception!" + newline + e.toString());
         }
 
     }  // end run() thread method

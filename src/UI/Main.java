@@ -193,14 +193,26 @@ public class Main extends Application
             }
         });
 
-        Button summary = new Button("Bank Accounts");
-        summary.getStyleClass().add("primary-color");
-        summary.setOnAction(new EventHandler<ActionEvent>()
+        Button bankAccountsQuery = new Button("Bank Accounts");
+        bankAccountsQuery.getStyleClass().add("primary-color");
+        bankAccountsQuery.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
+                Platform.runLater(new Runnable()
+                {
+                    public void run()
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("--- Bank Accounts ---");
+                        alert.setHeaderText("All Bank Accounts: ");
 
+                        alert.setContentText(ServerUtils.sockServer.getAllBankAccounts());
+
+                        alert.showAndWait();
+                    }
+                });
             }
         });
 
@@ -213,7 +225,7 @@ public class Main extends Application
         HBox hb = new HBox();
         hb.setPadding(new Insets(15, 15, 15, 15));
         hb.setSpacing(50);
-        hb.getChildren().addAll(exitButton, clients, showLog, summary);
+        hb.getChildren().addAll(exitButton, clients, showLog, bankAccountsQuery);
         hb.setAlignment(Pos.CENTER);
         //
         // vertical has IP text area and buttons below
