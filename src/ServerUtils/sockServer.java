@@ -30,7 +30,7 @@ public class sockServer implements Runnable
     static final String newline = "\n";
     static int first_time = 1;
 
-    static int port_num = 3333;
+    static int port_num = 8080;
 
     static int numOfConnections = 0;
     static int numOfMessages = 0;
@@ -223,6 +223,15 @@ public class sockServer implements Runnable
                             transLog.wrBankAccountData(String.join(",", args));
                             bankAccounts.put(args[2], new BankAccount(args[0], args[1], args[2]));
                         }
+                    }
+                    else if (clientString.contains("Withdraw>")) {
+                        String tokens[] = clientString.split("\\>");
+                        String args[] = tokens[2].split("\\,");
+
+                        if (!bankAccounts.containsKey(args[2])) {
+                            transLog.wrBankTransactionsData(String.join(",", args));
+                        }
+           
                     }
                     else if (clientString.contains("Date>"))
                     {

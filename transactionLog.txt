@@ -17,3 +17,9 @@
 04-02-2020 23.10.53 : DataEntry>BankAccountsQuery>
 04-02-2020 23.11.55 : DataEntry>BankAccountsQuery>
 04-02-2020 23.12.07 : DataEntry>NewBankAccount>another new one,SAVINGS,ad862360-afe1-4b37-8137-de5a82547584
+04-03-2020 01.22.38 : ÿûÿû ÿûÿû'ÿýÿûÿýDataEntry>BankAccountsQuery>
+04-03-2020 01.23.29 : DataEntry>NewBankAccount>B,CHECKING,BankAccountId
+04-03-2020 01.25.26 : DataEntry>Withdraw>another new one,500,9e4f3163-c3c6-4583-a48d-cf6f5e46c7ae
+04-03-2020 01.26.51 : DataEntry>Withdraw>another new one,500
+04-03-2020 01.29.49 : ÿûÿû ÿûÿû'ÿýÿûÿýWithdraw>B,500
+04-03-2020 01.34.59 : ÿûÿû ÿûÿû'ÿýÿûÿýWithdraw>another new one,1000

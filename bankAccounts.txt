@@ -3,3 +3,4 @@ new account,SAVINGS,8fb3574f-de9c-43b9-bc85-1b2e47673534
 account 2,SAVINGS,6f7e5224-470b-4d08-9f98-2b45d2f6b236
 another account,CHECKING,4cf8c2d3-9ea1-4664-963d-6e02be3ae591
 another new one,SAVINGS,ad862360-afe1-4b37-8137-de5a82547584
+B,CHECKING,BankAccountId
