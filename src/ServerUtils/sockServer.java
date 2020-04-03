@@ -232,6 +232,14 @@ public class sockServer implements Runnable
                             transLog.wrBankTransactionData(String.join(",", args));
                         }
                     }
+                    else if (clientString.contains("Deposit>")) {
+                    	  String tokens[] = clientString.split("\\>");
+                        String args[] = tokens[2].split("\\,");
+
+                        if (!bankAccounts.containsKey(args[2])) {
+                            transLog.wrBankTransactionData(String.join(",", args));
+                        }
+                    }
                     else if (clientString.contains("Date>"))
                     {
                         numOfMessages++;
