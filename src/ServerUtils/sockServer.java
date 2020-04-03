@@ -224,8 +224,16 @@ public class sockServer implements Runnable
                             bankAccounts.put(args[2], new BankAccount(args[0], args[1], args[2]));
                         }
                     }
+                    else if (clientString.contains("Withdraw>")) {
+                        String tokens[] = clientString.split("\\>");
+                        String args[] = tokens[2].split("\\,");
+
+                        if (!bankAccounts.containsKey(args[2])) {
+                            transLog.wrBankTransactionData(String.join(",", args));
+                        }
+                    }
                     else if (clientString.contains("Deposit>")) {
-                    	String tokens[] = clientString.split("\\>");
+                    	  String tokens[] = clientString.split("\\>");
                         String args[] = tokens[2].split("\\,");
 
                         if (!bankAccounts.containsKey(args[2])) {

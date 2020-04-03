@@ -65,6 +65,22 @@ public class fileIO
         outg.close();
     }
 
+    public void wrBankTransactionData(String dataStr) {
+        FileWriter fwg = null;
+        try {
+            fwg = new FileWriter("bankTransactions.txt", true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BufferedWriter bwg = new BufferedWriter(fwg);
+        PrintWriter outg = new PrintWriter(bwg);
+
+        outg.println(dataStr);
+
+        outg.close();
+    }
+
     public Hashtable<String, BankAccount> readBankAccountData() {
         Hashtable<String, BankAccount> bankAccountsHash =
                 new Hashtable<String, BankAccount>();
