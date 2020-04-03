@@ -48,11 +48,11 @@ public class fileIO
 
         outg.close();
     }
-    
-    public void wrBankTransactionsData(String dataStr) {
+
+    public void wrBankTransactionData(String dataStr) {
         FileWriter fwg = null;
         try {
-            fwg = new FileWriter("BankTransactions.txt", true);
+            fwg = new FileWriter("bankTransactions.txt", true);
         } catch (IOException e) {
             e.printStackTrace();
         }
