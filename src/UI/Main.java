@@ -160,7 +160,7 @@ public class Main extends Application
                                 String line = br.readLine();
                                 while (line != null)
                                 {
-                                    logString = logString + line + "\r\n";
+                                    logString = logString + line + "\r\n\n";
                                     line = br.readLine();
                                 }
 
@@ -180,9 +180,14 @@ public class Main extends Application
                         alert.setTitle("--- Ticket Kiosk ---");
                         alert.setHeaderText("Transaction Log File");
 
-                        alert.setContentText(logString);
+                        TextArea area = new TextArea(logString);
+                        area.setWrapText(true);
+                        area.setEditable(false);
 
-                        alert.setWidth(300);
+                        alert.getDialogPane().setContent(area);
+                        alert.setResizable(true);
+
+                        alert.setWidth(500);
                         alert.setHeight(600);
                         alert.showAndWait();
                     }
@@ -208,7 +213,12 @@ public class Main extends Application
                         alert.setTitle("--- Bank Accounts ---");
                         alert.setHeaderText("All Bank Accounts: ");
 
-                        alert.setContentText(ServerUtils.sockServer.getAllBankAccounts());
+                        TextArea area = new TextArea(ServerUtils.sockServer.getAllBankAccounts());
+                        area.setWrapText(true);
+                        area.setEditable(false);
+
+                        alert.getDialogPane().setContent(area);
+                        alert.setResizable(true);
 
                         alert.showAndWait();
                     }

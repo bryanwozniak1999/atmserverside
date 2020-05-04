@@ -34,4 +34,5 @@
 04-03-2020 01.18.27 : DataEntry>Deposit>another new one,1000.00,209c20b6-1155-4749-a34b-5e39e1e0de4b
 04-03-2020 01.22.14 : DataEntry>Deposit>another new one,5000.00,209c20b6-1155-4749-a34b-5e39e1e0de4b
 04-03-2020 01.22.39 : DataEntry>Deposit>account 2,532.56,ea5af673-c912-4312-84ef-6d77e6211c92
-04-03-2020 01.23.50 : DataEntry>NewBankAccount>Final,CHECKING,bf1f5973-1efe-47eb-ab42-5fb549a2c42d
+04-03-2020 01.23.50 : DataEntry>NewBankAccount>Final,CHECKING,bf1f5973-1efe-47eb-ab42-5fb549a2c42d05-04-2020 19.31.14 : DataEntry>BankAccountsQuery>
+05-04-2020 19.31.57 : DataEntry>Deposit>another new one,5000,295c706a-b331-4bc8-8659-245e4952d23e
