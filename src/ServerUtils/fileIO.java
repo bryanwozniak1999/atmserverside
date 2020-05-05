@@ -113,4 +113,31 @@ public class fileIO
 
         return bankAccountsHash;
     }
+
+    public ArrayList<String> readTransactionsData(String accountId) {
+        ArrayList<String> transactions = new ArrayList<>();
+
+        try {
+            File transactionFile = new File("bankTransactions.txt");
+
+            BufferedReader br = new BufferedReader(new FileReader(transactionFile));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String args[] = line.split(",");
+
+                if (args[3].equals(accountId)) {
+                    transactions.add(line);
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+
+        return transactions;
+    }
 }
