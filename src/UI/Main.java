@@ -168,7 +168,7 @@ public class Main extends Application
                             }
                             else
                             {
-                                logString = "No log File Found!";
+                                logString = "No Bank Transactions Found!";
                             }
                         }
                         catch(Exception e2)

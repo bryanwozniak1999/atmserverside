@@ -78,12 +78,14 @@ public class fileIO
             while ((line = br.readLine()) != null) {
                 String args[] = line.split("\\,");
 
-                bankAccountsHash.put(args[2], new BankAccount(args[0], args[1], args[2]));
+                bankAccountsHash.put(args[3], new BankAccount(args[0], args[1], args[2], args[3]));
             }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
+            return new Hashtable<String, BankAccount>();
         } catch (IOException ex) {
             ex.printStackTrace();
+            return new Hashtable<String, BankAccount>();
         }
 
         return bankAccountsHash;

@@ -207,13 +207,17 @@ public class sockServer implements Runnable
                     }
                     else if (clientString.contains("BankAccountsQuery>"))
                     {
-                        ArrayList<String> bankAccountsList = new ArrayList<>();
+                        if (!bankAccounts.isEmpty()) {
+                            ArrayList<String> bankAccountsList = new ArrayList<>();
 
-                        for (var bankAccount: bankAccounts.values()) {
-                            bankAccountsList.add(bankAccount.toString());
+                            for (var bankAccount: bankAccounts.values()) {
+                                bankAccountsList.add(bankAccount.toString());
+                            }
+
+                            pstream.println(String.join(">", bankAccountsList));
+                        } else {
+                            pstream.println("NACK: No bank accounts in server");
                         }
-
-                        pstream.println(String.join(">", bankAccountsList));
                     }
                     else if (clientString.contains("NewBankAccount>")) {
                         String tokens[] = clientString.split("\\>");
@@ -221,7 +225,7 @@ public class sockServer implements Runnable
 
                         if (!bankAccounts.containsKey(args[2])) {
                             transLog.wrBankAccountData(String.join(",", args));
-                            bankAccounts.put(args[2], new BankAccount(args[0], args[1], args[2]));
+                            bankAccounts.put(args[3], new BankAccount(args[0], args[1], args[2], args[3]));
                         }
                     }
                     else if (clientString.contains("BankTransaction>")) {
