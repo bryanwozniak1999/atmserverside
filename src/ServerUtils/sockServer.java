@@ -227,7 +227,11 @@ public class sockServer implements Runnable
                             // get transactions for that account
                             ArrayList<String> transactions = transLog.readTransactionsData(arg);
 
-                            pstream.println(String.join(">", transactions));
+                            if (transactions.isEmpty()) {
+                                pstream.println("NACK: no transations for account: " + arg);
+                            } else {
+                                pstream.println(String.join(">", transactions));
+                            }
                         } else {
                             pstream.println("NACK: failed to get transactions");
                         }
@@ -261,7 +265,7 @@ public class sockServer implements Runnable
                         String tokens[] = clientString.split("\\>");
                         String args[] = tokens[2].split("\\,");
 
-                        if (bankAccounts.containsKey(args[3])) {
+                        if (bankAccounts.containsKey(args[5])) {
                             transLog.wrBankTransactionData(String.join(",", args));
                         } else {
                             pstream.println("NACK: Bank account doesn't exist");

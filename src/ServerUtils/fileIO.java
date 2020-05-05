@@ -126,7 +126,7 @@ public class fileIO
             while ((line = br.readLine()) != null) {
                 String args[] = line.split(",");
 
-                if (args[3].equals(accountId)) {
+                if (args[5].equals(accountId)) {
                     transactions.add(line);
                 }
             }
