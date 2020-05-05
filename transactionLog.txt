@@ -36,3 +36,13 @@
 04-03-2020 01.22.39 : DataEntry>Deposit>account 2,532.56,ea5af673-c912-4312-84ef-6d77e6211c92
 04-03-2020 01.23.50 : DataEntry>NewBankAccount>Final,CHECKING,bf1f5973-1efe-47eb-ab42-5fb549a2c42d05-04-2020 19.31.14 : DataEntry>BankAccountsQuery>
 05-04-2020 19.31.57 : DataEntry>Deposit>another new one,5000,295c706a-b331-4bc8-8659-245e4952d23e
+05-04-2020 19.45.24 : DataEntry>BankAccountsQuery>
+05-04-2020 19.45.42 : DataEntry>Deposit>another new one,25000,0b0f3e64-b9e6-45a7-9529-bb9e491564a0
+05-04-2020 19.46.28 : DataEntry>Withdraw>another new one,10000,0b0f3e64-b9e6-45a7-9529-bb9e491564a0
+05-04-2020 19.51.14 : DataEntry>BankAccountsQuery>
+05-04-2020 19.51.21 : DataEntry>Deposit>another new one,5000,36900716-11ed-4ffb-adf1-498083d797ff
+05-04-2020 20.01.47 : DataEntry>BankAccountsQuery>
+05-04-2020 20.01.58 : DataEntry>BankTransaction>Deposit,another new one,500000,df922d13-db62-459a-a6d7-3ddc77a056fc
+05-04-2020 20.02.22 : DataEntry>BankTransaction>Deposit,another new one,1000,df922d13-db62-459a-a6d7-3ddc77a056fc
+05-04-2020 20.03.10 : DataEntry>BankAccountsQuery>
+05-04-2020 20.03.25 : DataEntry>BankTransaction>Deposit,another new one,6000,b63d40e1-02a1-441a-8d43-bad614240771

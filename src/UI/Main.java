@@ -151,10 +151,10 @@ public class Main extends Application
                     {
                         try
                         {
-                            File f = new File("transactionLog.txt");
+                            File f = new File("bankTransactions.txt");
                             if (f.exists())
                             {
-                                FileReader reader = new FileReader("transactionLog.txt");
+                                FileReader reader = new FileReader("bankTransactions.txt");
                                 BufferedReader br = new BufferedReader(reader);
 
                                 String line = br.readLine();
