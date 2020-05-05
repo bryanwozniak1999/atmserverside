@@ -212,8 +212,15 @@ public class Main extends Application
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("--- Bank Accounts ---");
                         alert.setHeaderText("All Bank Accounts: ");
+                        TextArea area = new TextArea();
 
-                        TextArea area = new TextArea(ServerUtils.sockServer.getAllBankAccounts());
+                        String accounts = ServerUtils.sockServer.getAllBankAccounts();
+                        if (!accounts.isEmpty()) {
+                            area.setText(accounts);
+                        } else {
+                            area.setText("No Bank Accounts");
+                        }
+
                         area.setWrapText(true);
                         area.setEditable(false);
 

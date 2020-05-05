@@ -16,6 +16,10 @@ public class BankAccount
         Balance = balance;
     }
 
+    public void SetBalance(String balance) {
+        this.Balance = balance;
+    }
+
     public String toString()
     {
         return AccountName + "," + AccountType + "," + Balance + "," + AccountId;

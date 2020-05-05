@@ -4,6 +4,7 @@ import Model.BankAccount;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
 
@@ -61,6 +62,28 @@ public class fileIO
         PrintWriter outg = new PrintWriter(bwg);
 
         outg.println(dataStr);
+
+        outg.close();
+    }
+
+    public void updateBankAccounts(Hashtable<String, BankAccount> bankAccountHashtable) {
+        FileWriter fwg = null;
+        try {
+            fwg = new FileWriter("bankAccounts.txt", false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BufferedWriter bwg = new BufferedWriter(fwg);
+        PrintWriter outg = new PrintWriter(bwg);
+
+        ArrayList<String> bankAccountsList = new ArrayList<>();
+
+        for (var bankAccount: bankAccountHashtable.values()) {
+            bankAccountsList.add(bankAccount.toString());
+        }
+
+        outg.println(String.join("\n", bankAccountsList));
 
         outg.close();
     }

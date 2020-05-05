@@ -226,6 +226,22 @@ public class sockServer implements Runnable
                         if (!bankAccounts.containsKey(args[2])) {
                             transLog.wrBankAccountData(String.join(",", args));
                             bankAccounts.put(args[3], new BankAccount(args[0], args[1], args[2], args[3]));
+                        } else {
+                            pstream.println("NACK: bank account already exists");
+                        }
+                    }
+                    else if (clientString.contains("UpdateBankAccount>")) {
+                        String tokens[] = clientString.split("\\>");
+                        String args[] = tokens[2].split("\\,");
+
+                        if (bankAccounts.containsKey(args[0])) {
+                            BankAccount account = bankAccounts.get(args[0]);
+                            account.SetBalance(args[1]);
+                            bankAccounts.put(args[0], account);
+
+                            transLog.updateBankAccounts(bankAccounts);
+                        } else {
+                            pstream.println("NACK: failed to update account, bank account doesnt exist");
                         }
                     }
                     else if (clientString.contains("BankTransaction>")) {
@@ -234,6 +250,8 @@ public class sockServer implements Runnable
 
                         if (bankAccounts.containsKey(args[3])) {
                             transLog.wrBankTransactionData(String.join(",", args));
+                        } else {
+                            pstream.println("NACK: Bank account doesn't exist");
                         }
                     }
                     else if (clientString.contains("Date>"))
