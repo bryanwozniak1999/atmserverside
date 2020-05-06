@@ -207,13 +207,34 @@ public class sockServer implements Runnable
                     }
                     else if (clientString.contains("BankAccountsQuery>"))
                     {
-                        ArrayList<String> bankAccountsList = new ArrayList<>();
+                        if (!bankAccounts.isEmpty()) {
+                            ArrayList<String> bankAccountsList = new ArrayList<>();
 
-                        for (var bankAccount: bankAccounts.values()) {
-                            bankAccountsList.add(bankAccount.toString());
+                            for (var bankAccount: bankAccounts.values()) {
+                                bankAccountsList.add(bankAccount.toString());
+                            }
+
+                            pstream.println(String.join(">", bankAccountsList));
+                        } else {
+                            pstream.println("NACK: No bank accounts in server");
                         }
+                    }
+                    else if (clientString.contains("TransactionsQuery>")) {
+                        String tokens[] = clientString.split("\\>");
+                        String arg = tokens[2];
 
-                        pstream.println(String.join(">", bankAccountsList));
+                        if (bankAccounts.containsKey(arg)) {
+                            // get transactions for that account
+                            ArrayList<String> transactions = transLog.readTransactionsData(arg);
+
+                            if (transactions.isEmpty()) {
+                                pstream.println("NACK: no transations for account: " + arg);
+                            } else {
+                                pstream.println(String.join(">", transactions));
+                            }
+                        } else {
+                            pstream.println("NACK: failed to get transactions");
+                        }
                     }
                     else if (clientString.contains("NewBankAccount>")) {
                         String tokens[] = clientString.split("\\>");
@@ -221,23 +242,33 @@ public class sockServer implements Runnable
 
                         if (!bankAccounts.containsKey(args[2])) {
                             transLog.wrBankAccountData(String.join(",", args));
-                            bankAccounts.put(args[2], new BankAccount(args[0], args[1], args[2]));
+                            bankAccounts.put(args[3], new BankAccount(args[0], args[1], args[2], args[3]));
+                        } else {
+                            pstream.println("NACK: bank account already exists");
                         }
                     }
-                    else if (clientString.contains("Withdraw>")) {
+                    else if (clientString.contains("UpdateBankAccount>")) {
                         String tokens[] = clientString.split("\\>");
                         String args[] = tokens[2].split("\\,");
 
-                        if (!bankAccounts.containsKey(args[2])) {
-                            transLog.wrBankTransactionData(String.join(",", args));
+                        if (bankAccounts.containsKey(args[0])) {
+                            BankAccount account = bankAccounts.get(args[0]);
+                            account.SetBalance(args[1]);
+                            bankAccounts.put(args[0], account);
+
+                            transLog.updateBankAccounts(bankAccounts);
+                        } else {
+                            pstream.println("NACK: failed to update account, bank account doesnt exist");
                         }
                     }
-                    else if (clientString.contains("Deposit>")) {
-                    	  String tokens[] = clientString.split("\\>");
+                    else if (clientString.contains("BankTransaction>")) {
+                        String tokens[] = clientString.split("\\>");
                         String args[] = tokens[2].split("\\,");
 
-                        if (!bankAccounts.containsKey(args[2])) {
+                        if (bankAccounts.containsKey(args[5])) {
                             transLog.wrBankTransactionData(String.join(",", args));
+                        } else {
+                            pstream.println("NACK: Bank account doesn't exist");
                         }
                     }
                     else if (clientString.contains("Date>"))

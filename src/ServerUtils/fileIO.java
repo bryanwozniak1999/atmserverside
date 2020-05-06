@@ -4,6 +4,7 @@ import Model.BankAccount;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
 
@@ -65,6 +66,28 @@ public class fileIO
         outg.close();
     }
 
+    public void updateBankAccounts(Hashtable<String, BankAccount> bankAccountHashtable) {
+        FileWriter fwg = null;
+        try {
+            fwg = new FileWriter("bankAccounts.txt", false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BufferedWriter bwg = new BufferedWriter(fwg);
+        PrintWriter outg = new PrintWriter(bwg);
+
+        ArrayList<String> bankAccountsList = new ArrayList<>();
+
+        for (var bankAccount: bankAccountHashtable.values()) {
+            bankAccountsList.add(bankAccount.toString());
+        }
+
+        outg.println(String.join("\n", bankAccountsList));
+
+        outg.close();
+    }
+
     public Hashtable<String, BankAccount> readBankAccountData() {
         Hashtable<String, BankAccount> bankAccountsHash =
                 new Hashtable<String, BankAccount>();
@@ -78,14 +101,43 @@ public class fileIO
             while ((line = br.readLine()) != null) {
                 String args[] = line.split("\\,");
 
-                bankAccountsHash.put(args[2], new BankAccount(args[0], args[1], args[2]));
+                bankAccountsHash.put(args[3], new BankAccount(args[0], args[1], args[2], args[3]));
             }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
+            return new Hashtable<String, BankAccount>();
         } catch (IOException ex) {
             ex.printStackTrace();
+            return new Hashtable<String, BankAccount>();
         }
 
         return bankAccountsHash;
+    }
+
+    public ArrayList<String> readTransactionsData(String accountId) {
+        ArrayList<String> transactions = new ArrayList<>();
+
+        try {
+            File transactionFile = new File("bankTransactions.txt");
+
+            BufferedReader br = new BufferedReader(new FileReader(transactionFile));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String args[] = line.split(",");
+
+                if (args[5].equals(accountId)) {
+                    transactions.add(line);
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+
+        return transactions;
     }
 }

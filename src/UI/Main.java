@@ -151,16 +151,16 @@ public class Main extends Application
                     {
                         try
                         {
-                            File f = new File("transactionLog.txt");
+                            File f = new File("bankTransactions.txt");
                             if (f.exists())
                             {
-                                FileReader reader = new FileReader("transactionLog.txt");
+                                FileReader reader = new FileReader("bankTransactions.txt");
                                 BufferedReader br = new BufferedReader(reader);
 
                                 String line = br.readLine();
                                 while (line != null)
                                 {
-                                    logString = logString + line + "\r\n";
+                                    logString = logString + line + "\r\n\n";
                                     line = br.readLine();
                                 }
 
@@ -168,7 +168,7 @@ public class Main extends Application
                             }
                             else
                             {
-                                logString = "No log File Found!";
+                                logString = "No Bank Transactions Found!";
                             }
                         }
                         catch(Exception e2)
@@ -180,9 +180,14 @@ public class Main extends Application
                         alert.setTitle("--- Ticket Kiosk ---");
                         alert.setHeaderText("Transaction Log File");
 
-                        alert.setContentText(logString);
+                        TextArea area = new TextArea(logString);
+                        area.setWrapText(true);
+                        area.setEditable(false);
 
-                        alert.setWidth(300);
+                        alert.getDialogPane().setContent(area);
+                        alert.setResizable(true);
+
+                        alert.setWidth(500);
                         alert.setHeight(600);
                         alert.showAndWait();
                     }
@@ -207,8 +212,20 @@ public class Main extends Application
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("--- Bank Accounts ---");
                         alert.setHeaderText("All Bank Accounts: ");
+                        TextArea area = new TextArea();
 
-                        alert.setContentText(ServerUtils.sockServer.getAllBankAccounts());
+                        String accounts = ServerUtils.sockServer.getAllBankAccounts();
+                        if (!accounts.isEmpty()) {
+                            area.setText(accounts);
+                        } else {
+                            area.setText("No Bank Accounts");
+                        }
+
+                        area.setWrapText(true);
+                        area.setEditable(false);
+
+                        alert.getDialogPane().setContent(area);
+                        alert.setResizable(true);
 
                         alert.showAndWait();
                     }
