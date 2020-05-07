@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Date;
+
+import ServerUtils.fileIO;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -37,6 +40,7 @@ public class Main extends Application
     @Override
     public void start (Stage stage) throws FileNotFoundException
     {
+        fileIO fileIO = new fileIO();
         InetAddress ipAddress = null;
         try
         {
@@ -60,7 +64,7 @@ public class Main extends Application
         textArea_1 = new TextArea();
         textArea_1.setEditable(false);
         textArea_1.setPrefHeight(80);
-        textArea_1.setPrefWidth(300);
+        textArea_1.setPrefWidth(500);
         textArea_1.setFont(Font.font("Verdana", 18));
 
         //
@@ -77,14 +81,15 @@ public class Main extends Application
         clock.getStyleClass().add("text-area-background");
         
         // drop down of users names or ids
-        String users[] = {"John Doe", "Jane Doe", "Anonymous"};
+        ArrayList<String> users = fileIO.readUsersData();
         
-        Label selected = new Label("Selected: " + users[0]);
+        Label selected = new Label("Selected: " + users.get(0));
         ComboBox<String> list = new ComboBox<String>(FXCollections.observableArrayList(users));
         list.getSelectionModel().selectFirst();
         list.setOnAction(e -> {
-        	selected.setText("Selected: " + list.getValue());
-        	textArea_1.setText("Name: " + list.getValue() + "\nBalance: $30000" + "\nTransactions: 25" + "\nBank Accounts: 5");
+            String args[] = list.getValue().split("\\,");
+        	selected.setText("Selected: " + args[0] + " " + args[1]);
+        	textArea_1.setText("Name: " + args[0] + " " + args[1] + "\nID: " + args[2]);
         });
         
         
