@@ -35,6 +35,7 @@ public class Main extends Application
     public static TextArea textArea;
     public static TextArea textArea_1;
     public static TextArea textArea_2;
+    public String selectedUser;
     TextArea               clock;
 
     @Override
@@ -86,10 +87,19 @@ public class Main extends Application
         Label selected = new Label("Selected: " + users.get(0));
         ComboBox<String> list = new ComboBox<String>(FXCollections.observableArrayList(users));
         list.getSelectionModel().selectFirst();
+
+        String args[] = list.getValue().split("\\,");
+        selected.setText("Selected: " + args[0] + " " + args[1]);
+        textArea_1.setText("Name: " + args[0] + " " + args[1] + "\nID: " + args[2]);
+
+        selectedUser = args[2];
+
         list.setOnAction(e -> {
-            String args[] = list.getValue().split("\\,");
-        	selected.setText("Selected: " + args[0] + " " + args[1]);
-        	textArea_1.setText("Name: " + args[0] + " " + args[1] + "\nID: " + args[2]);
+            String arguments[] = list.getValue().split("\\,");
+        	selected.setText("Selected: " + arguments[0] + " " + arguments[1]);
+        	textArea_1.setText("Name: " + arguments[0] + " " + arguments[1] + "\nID: " + arguments[2]);
+
+        	selectedUser = arguments[2];
         });
         
         
@@ -129,18 +139,6 @@ public class Main extends Application
             }
         });
 
-
-        Button clients = new Button("Clients");
-        clients.getStyleClass().add("primary-color");
-        clients.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent e)
-            {
-
-            }
-        });
-
         Button showLog = new Button("Transaction Log");
         showLog.getStyleClass().add("primary-color");
         showLog.setOnAction(new EventHandler<ActionEvent>()
@@ -165,7 +163,22 @@ public class Main extends Application
                                 String line = br.readLine();
                                 while (line != null)
                                 {
-                                    logString = logString + line + "\r\n\n";
+                                    String bankAccountsAsString = ServerUtils.sockServer.getAllBankAccounts(selectedUser);
+
+                                    String bankAccountsAsList[] = bankAccountsAsString.split("\\r\\n\\n");
+
+                                    for (var account: bankAccountsAsList) {
+                                        if (!account.isEmpty()) {
+                                            String lineArgs[] = line.split("\\,");
+                                            String accountArgs[] = account.split("\\,");
+
+                                            if (accountArgs[3].equals(lineArgs[5])) {
+                                                logString = logString + line + "\r\n\n";
+                                            }
+                                        }
+                                    }
+
+
                                     line = br.readLine();
                                 }
 
@@ -219,7 +232,7 @@ public class Main extends Application
                         alert.setHeaderText("All Bank Accounts: ");
                         TextArea area = new TextArea();
 
-                        String accounts = ServerUtils.sockServer.getAllBankAccounts();
+                        String accounts = ServerUtils.sockServer.getAllBankAccounts(selectedUser);
                         if (!accounts.isEmpty()) {
                             area.setText(accounts);
                         } else {
@@ -247,7 +260,7 @@ public class Main extends Application
         HBox hb = new HBox();
         hb.setPadding(new Insets(15, 15, 15, 15));
         hb.setSpacing(50);
-        hb.getChildren().addAll(exitButton, clients, showLog, bankAccountsQuery);
+        hb.getChildren().addAll(exitButton, showLog, bankAccountsQuery);
         hb.setAlignment(Pos.CENTER);
         //
         // vertical has IP text area and buttons below

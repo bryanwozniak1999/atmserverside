@@ -114,15 +114,20 @@ public class sockServer implements Runnable
     //
     // get all bank account data from the hash table keys
     //
-    public static String getAllBankAccounts()
+    public static String getAllBankAccounts(String userId)
     {
         String rs="";
 
         List<String> v = new ArrayList<String>(bankAccounts.keySet());
         Collections.sort(v);
 
-        for (String str : v)
-            rs = rs + bankAccounts.get(str) + "\r\n\n";
+        for (String str : v) {
+            var bankAccount = bankAccounts.get(str);
+
+            if (bankAccount.GetUserId().equals(userId)) {
+                rs = rs + bankAccount + "\r\n\n";
+            }
+        }
 
         return rs;
     }
