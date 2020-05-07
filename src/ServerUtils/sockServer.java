@@ -207,11 +207,17 @@ public class sockServer implements Runnable
                     }
                     else if (clientString.contains("BankAccountsQuery>"))
                     {
+                        String tokens[] = clientString.split("\\>");
+                        String userId = tokens[2];
                         if (!bankAccounts.isEmpty()) {
                             ArrayList<String> bankAccountsList = new ArrayList<>();
 
                             for (var bankAccount: bankAccounts.values()) {
-                                bankAccountsList.add(bankAccount.toString());
+                                if (bankAccount.GetUserId().equals(userId)) {
+                                    bankAccountsList.add(bankAccount.toString());
+                                } else {
+                                    continue;
+                                }
                             }
 
                             pstream.println(String.join(">", bankAccountsList));
@@ -221,14 +227,14 @@ public class sockServer implements Runnable
                     }
                     else if (clientString.contains("TransactionsQuery>")) {
                         String tokens[] = clientString.split("\\>");
-                        String arg = tokens[2];
+                        String bankAccountId = tokens[2];
 
-                        if (bankAccounts.containsKey(arg)) {
+                        if (bankAccounts.containsKey(bankAccountId)) {
                             // get transactions for that account
-                            ArrayList<String> transactions = transLog.readTransactionsData(arg);
+                            ArrayList<String> transactions = transLog.readTransactionsData(bankAccountId);
 
                             if (transactions.isEmpty()) {
-                                pstream.println("NACK: no transations for account: " + arg);
+                                pstream.println("NACK: no transations for account: " + bankAccountId);
                             } else {
                                 pstream.println(String.join(">", transactions));
                             }
@@ -236,13 +242,18 @@ public class sockServer implements Runnable
                             pstream.println("NACK: failed to get transactions");
                         }
                     }
+                    else if (clientString.contains("GetUsers")) {
+                        ArrayList<String> users = transLog.readUsersData();
+
+                        pstream.println(String.join(">", users));
+                    }
                     else if (clientString.contains("NewBankAccount>")) {
                         String tokens[] = clientString.split("\\>");
                         String args[] = tokens[2].split("\\,");
 
                         if (!bankAccounts.containsKey(args[2])) {
                             transLog.wrBankAccountData(String.join(",", args));
-                            bankAccounts.put(args[3], new BankAccount(args[0], args[1], args[2], args[3]));
+                            bankAccounts.put(args[3], new BankAccount(args[0], args[1], args[2], args[3], args[4]));
                         } else {
                             pstream.println("NACK: bank account already exists");
                         }

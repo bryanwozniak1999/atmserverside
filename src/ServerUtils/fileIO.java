@@ -101,7 +101,7 @@ public class fileIO
             while ((line = br.readLine()) != null) {
                 String args[] = line.split("\\,");
 
-                bankAccountsHash.put(args[3], new BankAccount(args[0], args[1], args[2], args[3]));
+                bankAccountsHash.put(args[3], new BankAccount(args[0], args[1], args[2], args[3], args[4]));
             }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -112,6 +112,29 @@ public class fileIO
         }
 
         return bankAccountsHash;
+    }
+
+    public ArrayList<String> readUsersData() {
+        ArrayList<String> users = new ArrayList<>();
+
+        try {
+            File usersFile = new File("users.txt");
+
+            BufferedReader br = new BufferedReader(new FileReader(usersFile));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                users.add(line);
+            }
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+
+        return users;
     }
 
     public ArrayList<String> readTransactionsData(String accountId) {
